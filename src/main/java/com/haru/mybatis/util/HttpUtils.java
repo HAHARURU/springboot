@@ -108,7 +108,7 @@ public class HttpUtils {
      * 使用get方式利用HttpClient请求数据
      *
      * @param url
-     * @param headers
+     * @param headers HashUtils.getMap("Content-type", "application/json;charset=UTF-8")
      * @param params
      * @param respCharset
      * @param body
