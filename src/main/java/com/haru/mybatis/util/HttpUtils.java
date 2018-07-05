@@ -31,7 +31,6 @@ import java.util.concurrent.ConcurrentSkipListMap;
  */
 public class HttpUtils {
     static final Logger logger = LoggerFactory.getLogger(HttpUtils.class);
-
     /**
      * 使用get方式利用HttpClient请求数据
      *
