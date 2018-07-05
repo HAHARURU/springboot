@@ -26,4 +26,14 @@ public class HashUtils {
         }
         return map;
     }
+
+    /**
+     * 获取String值
+     *
+     * @param rec
+     * @param key
+     */
+    public static String getStringValue(Map rec, String key) {
+        return rec == null || rec.get(key) == null ? null : String.valueOf(rec.get(key));
+    }
 }
