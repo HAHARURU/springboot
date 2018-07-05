@@ -45,7 +45,6 @@ public class HttpUtils {
         GetMethod method = null;
         InputStream resStream = null;
         BufferedReader br = null;
-
         try {
             client = new HttpClient(new HttpClientParams(), new SimpleHttpConnectionManager(true));
             client.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
@@ -61,7 +60,6 @@ public class HttpUtils {
                 }
                 method.setQueryString(nvList.toArray(new NameValuePair[]{}));
             }
-
             int code = client.executeMethod(method);
             resStream = method.getResponseBodyAsStream();
             br = new BufferedReader(new InputStreamReader(resStream, respCharset));
@@ -70,7 +68,6 @@ public class HttpUtils {
             while ((resTemp = br.readLine()) != null) {
                 resBuffer.append(resTemp);
             }
-
             String response = resBuffer.toString();
             if (code != 200) {
                 throw new CustomException("错误状态码:" + code + response);
@@ -87,7 +84,6 @@ public class HttpUtils {
                     logger.error("get请求出错：", e);
                 }
             }
-
             if (br != null) {
                 try {
                     br.close();
@@ -95,7 +91,6 @@ public class HttpUtils {
                     logger.error("get请求出错：", e);
                 }
             }
-
             if (method != null) {
                 try {
                     method.releaseConnection();
@@ -104,7 +99,6 @@ public class HttpUtils {
                     logger.error("get请求出错：", e);
                 }
             }
-
             if (client != null)
                 client.getHttpConnectionManager().closeIdleConnections(0);
 
@@ -130,7 +124,6 @@ public class HttpUtils {
         PostMethod method = null;
         InputStream resStream = null;
         BufferedReader br = null;
-
         try {
             client = new HttpClient(new HttpClientParams(), new SimpleHttpConnectionManager(true));
             client.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
@@ -142,7 +135,6 @@ public class HttpUtils {
                     method.setRequestHeader(key, headers.get(key));
                 }
             }
-
             if (params != null) {
                 MultiValueMap<String, String> paramsMulti = new LinkedMultiValueMap<String, String>();
                 ConcurrentSkipListMap cbody = new ConcurrentSkipListMap();
@@ -154,11 +146,9 @@ public class HttpUtils {
                 String sign = MD5.sign(sourceStr, "", "");  //加密
                 url = UriComponentsBuilder.fromHttpUrl(url).queryParams(paramsMulti).build().toUriString(); //生成地址
             }
-
             if (StringUtils.isNotBlank(body)) {
                 method.setRequestBody(body);    //设置body会清空method.addParameter(nvp)的设置
             }
-
             int code = client.executeMethod(method);
             resStream = method.getResponseBodyAsStream();
             br = new BufferedReader(new InputStreamReader(resStream, respCharset));
@@ -172,7 +162,6 @@ public class HttpUtils {
             if (code != 200) {
                 throw new CustomException("错误状态码:" + code + response);
             }
-
             return response;
         } catch (Exception e) {
             logger.error("post请求错误：", e);
@@ -181,7 +170,6 @@ public class HttpUtils {
             if (url.startsWith("https")) {
                 Protocol.unregisterProtocol("https");
             }
-
             if (resStream != null) {
                 try {
                     resStream.close();
@@ -189,7 +177,6 @@ public class HttpUtils {
                     logger.error("post请求错误：", e);
                 }
             }
-
             if (br != null) {
                 try {
                     br.close();
@@ -197,7 +184,6 @@ public class HttpUtils {
                     logger.error("post请求错误：", e);
                 }
             }
-
             if (method != null) {
                 try {
                     method.releaseConnection();
@@ -206,7 +192,6 @@ public class HttpUtils {
                     logger.error("post请求错误：", e);
                 }
             }
-
             if (client != null)
                 client.getHttpConnectionManager().closeIdleConnections(0);
         }
