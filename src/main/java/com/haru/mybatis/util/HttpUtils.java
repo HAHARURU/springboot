@@ -63,7 +63,6 @@ public class HttpUtils {
             int code = client.executeMethod(method);
             resStream = method.getResponseBodyAsStream();
             br = new BufferedReader(new InputStreamReader(resStream, respCharset));
-
             StringBuffer resBuffer = new StringBuffer();
             String resTemp = "";
             while ((resTemp = br.readLine()) != null) {
