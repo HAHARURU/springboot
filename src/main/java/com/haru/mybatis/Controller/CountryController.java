@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -58,5 +60,12 @@ public class CountryController {
         List<Country> countryList = countryService.getAll(Integer.parseInt(params.get("page").toString()),
                 Integer.parseInt(params.get("size").toString()), params.get("name").toString());
         return getGson().toJson(new ResultDto<List<Country>>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryList));
+    }
+
+    @RequestMapping(value = "/findAllGet", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String findAllGet(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        return getGson().toJson(new ResultDto<List<Country>>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), null));
     }
 }
