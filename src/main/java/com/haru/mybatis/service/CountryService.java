@@ -92,7 +92,6 @@ public class CountryService {
             cities.forEach(item -> {
                 item.setCountry(countryList.get(0));
                 item.setId(UUID.randomUUID().toString().trim());
-                item.setId(UUID.randomUUID().toString().trim());
                 item.setCreateTime(new Timestamp(new Date().getTime()));
                 if (cityMapper.insertCity(item) <= 0) {
                     throw new CustomException("城市" + ErrorEnum.保存失败.name(), String.valueOf(ErrorEnum.保存失败.getValue()));
