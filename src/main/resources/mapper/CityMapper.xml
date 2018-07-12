@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haru.mybatis.mapper.CityMapper">
+    <resultMap id="cityLazyCountry" type="com.haru.mybatis.model.City">
+        <id column="id" property="id"/>
+        <result column="city_name" property="cityName"/>
+        <result column="description" property="description"/>
+        <result column="create_time" property="createTime"/>
+        <result column="valid" property="valid"/>
+        <result column="version" property="version"/>
+        <association column="country_id" property="country" javaType="com.haru.mybatis.model.Country" select="getCountryById"/>
+    </resultMap>
+
+    <select id="getCountryById" parameterType="String" resultType="country">
+        select * from country where id = #{id};
+    </select>
+
+    <sql id="cityParams">
+        <if test="city != null">
+            <if test="city.description != null and city.description != ''">
+                and city.description like '%${city.description}%'
+            </if>
+        </if>
+    </sql>
+
+    <sql id="namesParams">
+        <if test="names != null">
+            <foreach collection="names" item="name" open="AND city_name in (" close=")" separator=",">
+                #{name}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="getCityWithCountry" parameterType="com.haru.mybatis.model.vo.CityVo" resultMap="cityLazyCountry">
+        select * from city
+        <where>
+            <include refid="cityParams"/>
+            <include refid="namesParams"/>
+        </where>
+        order by city.create_time desc;
+    </select>
+</mapper>

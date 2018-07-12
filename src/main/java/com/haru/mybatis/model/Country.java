@@ -6,6 +6,7 @@ import org.apache.ibatis.type.JdbcType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author HARU
@@ -27,6 +28,8 @@ public class Country extends BaseEntity implements Serializable {
      */
     @ColumnType(jdbcType = JdbcType.VARCHAR, typeHandler = BaseEnumTypeHandler.class)
     private StateEnum state;
+
+    private List<City> cities;
 
     public String getName() {
         return name;
@@ -50,5 +53,13 @@ public class Country extends BaseEntity implements Serializable {
 
     public void setState(StateEnum state) {
         this.state = state;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 }

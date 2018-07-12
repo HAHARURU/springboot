@@ -6,7 +6,9 @@ import com.google.gson.reflect.TypeToken;
 import com.haru.mybatis.dto.ResultDto;
 import com.haru.mybatis.enu.ErrorEnum;
 import com.haru.mybatis.exception.CustomException;
+import com.haru.mybatis.model.City;
 import com.haru.mybatis.model.Country;
+import com.haru.mybatis.model.vo.CityVo;
 import com.haru.mybatis.service.CountryService;
 import com.haru.mybatis.util.GsonView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +69,22 @@ public class CountryController {
     String findAllGet(HttpServletRequest request, HttpServletResponse response) {
         Map<String, String[]> parameterMap = request.getParameterMap();
         return getGson().toJson(new ResultDto<List<Country>>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), null));
+    }
+
+    @RequestMapping(value = "/getCity", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String getCity(String cityJSON) {
+        CityVo cityVo = getGson().fromJson(cityJSON, new TypeToken<CityVo>() {
+        }.getType());
+        List<City> city = countryService.getCity(cityVo);
+        ResultDto<List<City>> listResultDto = new ResultDto<>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), city);
+        String json = getGson().toJson(listResultDto);
+        return json;
+    }
+
+    @RequestMapping(value = "/getAllCountries", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String getAllCountries() {
+        return getGson().toJson(new ResultDto<List<Country>>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.getAllCountries()));
     }
 }

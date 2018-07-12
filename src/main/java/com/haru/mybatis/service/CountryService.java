@@ -1,8 +1,11 @@
 package com.haru.mybatis.service;
 
 import com.github.pagehelper.PageHelper;
+import com.haru.mybatis.mapper.CityMapper;
 import com.haru.mybatis.mapper.CountryMapper;
+import com.haru.mybatis.model.City;
 import com.haru.mybatis.model.Country;
+import com.haru.mybatis.model.vo.CityVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,9 @@ public class CountryService {
 
     @Autowired
     private CountryMapper countryMapper;
+
+    @Autowired
+    private CityMapper cityMapper;
 
     public Country getById(String id) {
         return countryMapper.selectByPrimaryKey(id);
@@ -53,5 +59,15 @@ public class CountryService {
             criteria.andLike("name", "%" + name + "%");
         }
         return countryMapper.selectByExample(condition);
+    }
+
+    public List<City> getCity(CityVo cityVo) {
+        List<City> cityWithCountry = cityMapper.getCityWithCountry(cityVo);
+
+        return cityWithCountry;
+    }
+
+    public List<Country> getAllCountries() {
+        return countryMapper.getAllCountries();
     }
 }
