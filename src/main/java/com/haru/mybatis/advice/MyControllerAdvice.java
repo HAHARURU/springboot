@@ -36,6 +36,6 @@ public class MyControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = CustomException.class)
     public String myErrorHandler(CustomException ex) {
-        return getGson().toJson(new ResultDto<List<Country>>(ex.getCode(), ex.getMessage(), null));
+        return getGson().toJson(new ResultDto<Object>(ex.getCode(), ex.getMessage(), null));
     }
 }

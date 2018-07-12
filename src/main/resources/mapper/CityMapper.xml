@@ -40,4 +40,9 @@
         </where>
         order by city.create_time desc;
     </select>
+
+    <insert id="insertCity" parameterType="com.haru.mybatis.model.City">
+        insert into city(id, city_name, description, create_time, valid, version, country_id)
+        value (#{id}, #{cityName}, #{description}, #{createTime}, #{valid},#{version}, #{country.id})
+    </insert>
 </mapper>

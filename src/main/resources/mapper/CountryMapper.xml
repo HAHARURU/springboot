@@ -23,4 +23,12 @@
     <select id="getAllCountries" resultMap="countryList">
         select * from country left join city on country.id = city.country_id order by country.create_time desc;
     </select>
+
+    <insert id="insertCountries" parameterType="java.util.List">
+        insert into country(id, `name`, code, create_time, valid, state, version)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.name},#{item.code},#{item.createTime}, #{item.valid},#{item.state},#{item.version})
+        </foreach>
+    </insert >
 </mapper>

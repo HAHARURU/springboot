@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface CountryMapper extends MyMapper<Country> {
     List<Country> getAllCountries();
+
+    int insertCountries(List<Country> countryList);
 }

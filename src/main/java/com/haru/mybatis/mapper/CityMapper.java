@@ -12,4 +12,6 @@ import java.util.List;
  */
 public interface CityMapper extends MyMapper<City> {
     List<City> getCityWithCountry(CityVo cityVo);
+
+    int insertCity(City city);
 }

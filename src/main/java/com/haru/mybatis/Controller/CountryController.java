@@ -87,4 +87,24 @@ public class CountryController {
     String getAllCountries() {
         return getGson().toJson(new ResultDto<List<Country>>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.getAllCountries()));
     }
+
+    @RequestMapping(value = "/insertCity", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String insertCity(String cityJSON) {
+        City city = getGson().fromJson(cityJSON, new TypeToken<City>() {
+        }.getType());
+        ResultDto<City> resultDto = new ResultDto<City>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.insertCity(city));
+        String json = getGson().toJson(resultDto);
+        return json;
+    }
+
+    @RequestMapping(value = "/insertCountry", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String insertCountry(String countryJSON) {
+        Country country = getGson().fromJson(countryJSON, new TypeToken<Country>() {
+        }.getType());
+        ResultDto<Country> resultDto = new ResultDto<Country>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.insertCountry(country));
+        String json = getGson().toJson(resultDto);
+        return json;
+    }
 }
