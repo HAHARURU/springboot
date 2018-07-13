@@ -37,36 +37,6 @@ public class CountryService {
     @Autowired
     private CityMapper cityMapper;
 
-    public Country getById(String id) {
-        return countryMapper.selectByPrimaryKey(id);
-    }
-
-    @Transactional
-    public void deleteById(String id) {
-        countryMapper.deleteByPrimaryKey(id);
-    }
-
-    @Transactional
-    public void save(Country country) {
-        if (country.getId() != null) {
-            countryMapper.updateByPrimaryKeySelective(country);
-        } else {
-            country.setId(UUID.randomUUID().toString().trim());
-            country.setCreateTime(new Timestamp(new Date().getTime()));
-            countryMapper.insert(country);
-        }
-    }
-
-    public List<Country> getAll(int page, int size, String name) {
-        PageHelper.startPage(page, size);
-        Condition condition = new Condition(Country.class);
-        Condition.Criteria criteria = condition.createCriteria();
-        if (!StringUtils.isEmpty(name)) {
-            criteria.andLike("name", "%" + name + "%");
-        }
-        return countryMapper.selectByExample(condition);
-    }
-
     public List<City> getCity(CityVo cityVo) {
         List<City> cityWithCountry = cityMapper.getCityWithCountry(cityVo);
 
@@ -134,4 +104,6 @@ public class CountryService {
         }
         return city;
     }
+
+
 }

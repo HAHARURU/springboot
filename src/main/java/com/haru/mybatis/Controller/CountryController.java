@@ -45,25 +45,6 @@ public class CountryController {
         return gson;
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public @ResponseBody
-    String save(String countryJSON) {
-        Country country = getGson().fromJson(countryJSON, new TypeToken<Country>() {
-        }.getType());
-        countryService.save(country);
-        return getGson().toJson(new ResultDto<Country>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), country));
-    }
-
-    @RequestMapping(value = "/findAll", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
-    public @ResponseBody
-    String findAll(String paramsJSON) {
-        Map<String, Object> params = getGson().fromJson(paramsJSON, new TypeToken<Map<String, Object>>() {
-        }.getType());
-        List<Country> countryList = countryService.getAll(Integer.parseInt(params.get("page").toString()),
-                Integer.parseInt(params.get("size").toString()), params.get("name").toString());
-        return getGson().toJson(new ResultDto<List<Country>>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryList));
-    }
-
     @RequestMapping(value = "/findAllGet", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public @ResponseBody
     String findAllGet(HttpServletRequest request, HttpServletResponse response) {
