@@ -107,6 +107,7 @@ public class CountryService {
 
     @Transactional
     public Country updateCountryWithCity(Country country) {
+        country.setVersion(country.getVersion() + 1);
         if (countryMapper.updateCountry(country) <= 0) {
             throw new CustomException("国家" + ErrorEnum.更新失败.name(), String.valueOf(ErrorEnum.更新失败.getValue()));
         }
