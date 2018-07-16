@@ -40,7 +40,6 @@
             <if test="state != null">state = #{state},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="valid != null">valid = #{valid},</if>
-            --             version取表中记录的原来的值
             <if test="version != null">version = #{version},</if>
         </set>
         where id = #{id} and version = #{version} - 1
