@@ -14,4 +14,6 @@ public interface CityMapper extends MyMapper<City> {
     List<City> getCityWithCountry(CityVo cityVo);
 
     int insertCity(City city);
+
+    int updateCities(List<City> cities);
 }

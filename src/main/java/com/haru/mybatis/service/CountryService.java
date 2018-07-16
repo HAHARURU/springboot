@@ -66,7 +66,7 @@ public class CountryService {
                 if (cityMapper.insertCity(item) <= 0) {
                     throw new CustomException("城市" + ErrorEnum.保存失败.name(), String.valueOf(ErrorEnum.保存失败.getValue()));
                 }
-                item.setCountry(null);
+                item.setCountry(null);  //避免关联循环
             });
         }
         return countryList.get(0);
@@ -105,5 +105,14 @@ public class CountryService {
         return city;
     }
 
-
+    @Transactional
+    public Country updateCountryWithCity(Country country) {
+        if (countryMapper.updateCountry(country) <= 0) {
+            throw new CustomException("国家" + ErrorEnum.更新失败.name(), String.valueOf(ErrorEnum.更新失败.getValue()));
+        }
+        if (cityMapper.updateCities(country.getCities()) <= 0) {
+            throw new CustomException("城市" + ErrorEnum.更新失败.name(), String.valueOf(ErrorEnum.更新失败.getValue()));
+        }
+        return country;
+    }
 }

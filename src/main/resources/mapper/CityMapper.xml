@@ -9,7 +9,8 @@
         <result column="create_time" property="createTime"/>
         <result column="valid" property="valid"/>
         <result column="version" property="version"/>
-        <association column="country_id" property="country" javaType="com.haru.mybatis.model.Country" select="getCountryById"/>
+        <association column="country_id" property="country" javaType="com.haru.mybatis.model.Country"
+                     select="getCountryById"/>
     </resultMap>
 
     <select id="getCountryById" parameterType="String" resultType="country">
@@ -45,4 +46,24 @@
         insert into city(id, city_name, description, create_time, valid, version, country_id)
         value (#{id}, #{cityName}, #{description}, #{createTime}, #{valid},#{version}, #{country.id})
     </insert>
+
+    <update id="updateCities" parameterType="java.util.List">
+        update city
+        <trim prefix="set city_name = case id" suffix="end,">
+            <foreach collection="list" item="item">
+                when #{item.id} then #{item.cityName}
+            </foreach>
+        </trim>
+        <trim suffixOverrides=",">
+            <trim prefix="description = case id" suffix="end,">
+                <foreach collection="list" item="item">
+                    when #{item.id} then #{item.description}
+                </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item.id}
+        </foreach>
+    </update>
 </mapper>

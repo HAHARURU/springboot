@@ -9,7 +9,8 @@ public enum ErrorEnum {
     Timestamp长度不支持Json解析(301),
     TimestampJson解析失败(302),
     保存失败(303),
-    不存在无法保存(304);
+    不存在无法保存(304),
+    更新失败(305);
     int value;
 
     ErrorEnum(int value) {

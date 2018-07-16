@@ -13,4 +13,6 @@ public interface CountryMapper extends MyMapper<Country> {
     List<Country> getAllCountries();
 
     int insertCountries(List<Country> countryList);
+
+    int updateCountry(Country country);
 }

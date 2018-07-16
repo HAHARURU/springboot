@@ -30,5 +30,19 @@
         <foreach collection="list" item="item" index="index" separator=",">
             (#{item.id},#{item.name},#{item.code},#{item.createTime}, #{item.valid},#{item.state},#{item.version})
         </foreach>
-    </insert >
+    </insert>
+
+    <update id="updateCountry" parameterType="com.haru.mybatis.model.Country">
+        update country
+        <set>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="valid != null">valid = #{valid},</if>
+            --             version取表中记录的原来的值
+            version = version + 1
+        </set>
+        where id = #{id} and version = #{version}
+    </update>
 </mapper>

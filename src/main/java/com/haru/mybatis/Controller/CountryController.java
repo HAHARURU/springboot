@@ -88,4 +88,14 @@ public class CountryController {
         String json = getGson().toJson(resultDto);
         return json;
     }
+
+    @RequestMapping(value = "/updateCountryWithCity", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String updateCountryWithCity(String countryJSON) {
+        Country country = getGson().fromJson(countryJSON, new TypeToken<Country>() {
+        }.getType());
+        ResultDto<Country> resultDto = new ResultDto<Country>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.updateCountryWithCity(country));
+        String json = getGson().toJson(resultDto);
+        return json;
+    }
 }
