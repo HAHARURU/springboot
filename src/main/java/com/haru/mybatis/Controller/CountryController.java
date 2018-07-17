@@ -45,6 +45,16 @@ public class CountryController {
         return gson;
     }
 
+    @RequestMapping(value = "/insertCountryOnly", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+    public @ResponseBody
+    String insertCountryOnly(String countryJSON) {
+        Country country = getGson().fromJson(countryJSON, new TypeToken<Country>() {
+        }.getType());
+        ResultDto<Country> resultDto = new ResultDto<Country>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.insertCountryOnly(country));
+        String json = getGson().toJson(resultDto);
+        return json;
+    }
+
     @RequestMapping(value = "/findAllGet", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
     public @ResponseBody
     String findAllGet(HttpServletRequest request, HttpServletResponse response) {
@@ -57,8 +67,7 @@ public class CountryController {
     String getCity(String cityJSON) {
         CityVo cityVo = getGson().fromJson(cityJSON, new TypeToken<CityVo>() {
         }.getType());
-        List<City> city = countryService.getCity(cityVo);
-        ResultDto<List<City>> listResultDto = new ResultDto<>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), city);
+        ResultDto<List<City>> listResultDto = new ResultDto<>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.getCity(cityVo));
         String json = getGson().toJson(listResultDto);
         return json;
     }

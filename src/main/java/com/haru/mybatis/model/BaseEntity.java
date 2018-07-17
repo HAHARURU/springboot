@@ -8,9 +8,9 @@ import java.sql.Timestamp;
  * @author HARU
  * @since 2018/5/28
  */
+@MappedSuperclass
 public class BaseEntity implements Serializable {
     @Id
-    @Column(name = "id")
     private String id;
 
     @Column(name = "create_time")

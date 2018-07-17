@@ -3,32 +3,39 @@ package com.haru.mybatis.model;
 import com.haru.mybatis.enu.StateEnum;
 import com.haru.mybatis.util.BaseEnumTypeHandler;
 import org.apache.ibatis.type.JdbcType;
-import tk.mybatis.mapper.annotation.ColumnType;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
  * @author HARU
  * @since 2018/5/28
  */
+@Entity
+@Table(name = "country")
 public class Country extends BaseEntity implements Serializable {
     /**
      * 名称
      */
+    @Column(length = 20)
     private String name;
 
     /**
      * 代码
      */
+    @Column(length = 20)
     private String code;
 
     /**
      * 状态
      */
-    @ColumnType(jdbcType = JdbcType.VARCHAR, typeHandler = BaseEnumTypeHandler.class)
+//    @ColumnType(jdbcType = JdbcType.VARCHAR, typeHandler = BaseEnumTypeHandler.class)
+    @Enumerated(EnumType.STRING)
     private StateEnum state;
 
+    @Transient
     private List<City> cities;
 
     public String getName() {

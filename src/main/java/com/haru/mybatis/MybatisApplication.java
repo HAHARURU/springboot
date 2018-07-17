@@ -1,9 +1,9 @@
 package com.haru.mybatis;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * @author HARU
@@ -11,7 +11,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @EnableWebMvc
 @SpringBootApplication
-@MapperScan(basePackages = {"com.haru.mybatis.mapper", "com.haru.mybatis.advice"}) //扫描面统一异常包
+@MapperScan(basePackages = {"com.haru.mybatis.mapper", "com.haru.mybatis.advice"}) //扫描统一异常包
 public class MybatisApplication {
 
     public static void main(String[] args) {

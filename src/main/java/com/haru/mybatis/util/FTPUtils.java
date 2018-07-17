@@ -1,11 +1,11 @@
 package com.haru.mybatis.util;
 
+import com.github.pagehelper.util.StringUtil;
 import com.haru.mybatis.exception.CustomException;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tk.mybatis.mapper.util.StringUtil;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;

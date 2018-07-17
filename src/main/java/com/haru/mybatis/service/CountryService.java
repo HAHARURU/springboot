@@ -8,14 +8,13 @@ import com.haru.mybatis.mapper.CountryMapper;
 import com.haru.mybatis.model.City;
 import com.haru.mybatis.model.Country;
 import com.haru.mybatis.model.vo.CityVo;
+import com.haru.mybatis.repository.CountryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import tk.mybatis.mapper.entity.Condition;
-import tk.mybatis.mapper.entity.Example;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -37,9 +36,17 @@ public class CountryService {
     @Autowired
     private CityMapper cityMapper;
 
+    @Autowired
+    private CountryRepository countryRepository;
+
+    @Transactional
+    public Country insertCountryOnly(Country country) {
+        List<Country> all = countryRepository.findAll();
+        return countryRepository.save(country);
+    }
+
     public List<City> getCity(CityVo cityVo) {
         List<City> cityWithCountry = cityMapper.getCityWithCountry(cityVo);
-
         return cityWithCountry;
     }
 
@@ -55,9 +62,8 @@ public class CountryService {
             this.insertCountries(countryList);
         } else {
             //update country
-
         }
-        if (countryList.size() > 0) {
+        if (countryList.size() > 0 && country.getCities() != null) {
             List<City> cities = country.getCities();
             cities.forEach(item -> {
                 item.setCountry(countryList.get(0));
