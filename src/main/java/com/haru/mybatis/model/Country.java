@@ -1,12 +1,9 @@
 package com.haru.mybatis.model;
 
 import com.haru.mybatis.enu.StateEnum;
-import com.haru.mybatis.util.BaseEnumTypeHandler;
-import org.apache.ibatis.type.JdbcType;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package com.haru.mybatis.util;
+package com.haru.mybatis.util.encryption;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

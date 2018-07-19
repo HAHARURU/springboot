@@ -2,6 +2,7 @@ package com.haru.mybatis.util;
 
 import com.github.pagehelper.util.StringUtil;
 import com.haru.mybatis.exception.CustomException;
+import com.haru.mybatis.util.http.HashUtils;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.*;
 import org.slf4j.Logger;
@@ -10,9 +11,7 @@ import org.slf4j.LoggerFactory;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.SocketException;
-import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
@@ -21,7 +20,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author HARU

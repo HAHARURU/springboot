@@ -1,4 +1,4 @@
-package com.haru.mybatis.util;
+package com.haru.mybatis.util.encryption;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

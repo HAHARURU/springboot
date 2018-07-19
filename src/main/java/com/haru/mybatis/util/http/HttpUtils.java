@@ -1,6 +1,8 @@
-package com.haru.mybatis.util;
+package com.haru.mybatis.util.http;
 
 import com.haru.mybatis.exception.CustomException;
+import com.haru.mybatis.util.encryption.MD5;
+import com.haru.mybatis.util.encryption.SortCollection;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;

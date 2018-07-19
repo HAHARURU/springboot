@@ -1,4 +1,4 @@
-package com.haru.mybatis.util;
+package com.haru.mybatis.util.http;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

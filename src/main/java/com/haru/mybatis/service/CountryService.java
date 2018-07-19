@@ -1,6 +1,8 @@
 package com.haru.mybatis.service;
 
 import com.github.pagehelper.PageHelper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.haru.mybatis.enu.ErrorEnum;
 import com.haru.mybatis.exception.CustomException;
 import com.haru.mybatis.mapper.CityMapper;
@@ -9,6 +11,8 @@ import com.haru.mybatis.model.City;
 import com.haru.mybatis.model.Country;
 import com.haru.mybatis.model.vo.CityVo;
 import com.haru.mybatis.repository.CountryRepository;
+import com.haru.mybatis.util.GsonView;
+import com.haru.mybatis.util.redis.RedisCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +43,20 @@ public class CountryService {
     @Autowired
     private CountryRepository countryRepository;
 
+    @Autowired
+    private RedisCache redisCache;
+
+    private Gson gson;
+
+    private Gson getGson() {
+        if (gson == null) {
+            GsonBuilder gb = new GsonBuilder();
+            GsonView.regGson(gb);
+            gson = gb.create();
+        }
+        return gson;
+    }
+
     @Transactional
     public Country insertCountryOnly(Country country) {
         List<Country> all = countryRepository.findAll();
@@ -51,7 +69,9 @@ public class CountryService {
     }
 
     public List<Country> getAllCountries() {
-        return countryMapper.getAllCountries();
+        List<Country> allCountries = countryMapper.getAllCountries();
+        redisCache.set("allCountries", this.getGson().toJson(allCountries));
+        return allCountries;
     }
 
     @Transactional

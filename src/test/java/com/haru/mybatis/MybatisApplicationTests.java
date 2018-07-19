@@ -1,18 +1,12 @@
 package com.haru.mybatis;
 
-import com.haru.mybatis.util.FTPUtils;
-import com.haru.mybatis.util.HttpUtils;
-import org.apache.commons.net.ftp.FTPFile;
-import org.apache.commons.net.ftp.FTPFileFilter;
+import com.haru.mybatis.util.http.HttpUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)

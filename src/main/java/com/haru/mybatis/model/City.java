@@ -2,7 +2,6 @@ package com.haru.mybatis.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 /**
  * @author HARU

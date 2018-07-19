@@ -1,4 +1,4 @@
-package com.haru.mybatis.util;
+package com.haru.mybatis.util.http;
 
 import org.apache.commons.httpclient.ConnectTimeoutException;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
