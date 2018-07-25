@@ -1,6 +1,7 @@
 package com.haru.mybatis;
 
 import com.haru.mybatis.model.Country;
+import com.haru.mybatis.mongoRepository.CountryMongoRepository;
 import com.haru.mybatis.repository.CountryRepository;
 import com.haru.mybatis.util.http.HttpUtils;
 import org.junit.Test;
@@ -21,6 +22,9 @@ public class MybatisApplicationTests {
 
     @Autowired
     private CountryRepository countryRepository;
+
+    @Autowired
+    private CountryMongoRepository countryMongoRepository;
 
     @Test
     public void contextLoads() {
@@ -43,10 +47,12 @@ public class MybatisApplicationTests {
 //        HttpUtils.get("http://localhost:4001/country/findAllGet", params,null);
 
         Country country = countryRepository.findByCode("CN");
-        System.out.println("第一次查询：" + country.getName());
+//        System.out.println("第一次查询：" + country.getName());
+//
+//        Country country2 = countryRepository.findByCode("CN");
+//        System.out.println("第二次查询：" + country2.getName());
 
-        Country country2 = countryRepository.findByCode("CN");
-        System.out.println("第二次查询：" + country2.getName());
+        countryMongoRepository.save(country);
 
 //        country.setName("中华");
 //        countryRepository.save(country);
