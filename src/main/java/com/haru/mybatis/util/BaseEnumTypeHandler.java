@@ -1,6 +1,6 @@
 package com.haru.mybatis.util;
 
-import com.haru.mybatis.enu.StateEnum;
+import com.haru.mybatis.enumPackage.StateEnum;
 import org.apache.ibatis.type.EnumTypeHandler;
 
 /**

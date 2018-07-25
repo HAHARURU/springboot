@@ -1,9 +1,8 @@
 package com.haru.mybatis.service;
 
-import com.github.pagehelper.PageHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.haru.mybatis.enu.ErrorEnum;
+import com.haru.mybatis.enumPackage.ErrorEnum;
 import com.haru.mybatis.exception.CustomException;
 import com.haru.mybatis.mapper.CityMapper;
 import com.haru.mybatis.mapper.CountryMapper;
@@ -141,5 +140,13 @@ public class CountryService {
             throw new CustomException("城市" + ErrorEnum.更新失败.name(), String.valueOf(ErrorEnum.更新失败.getValue()));
         }
         return country;
+    }
+
+    public void redisCountry() {
+        Country country = countryRepository.findByCode("CN");
+        System.out.println("第一次查询：" + country.getName());
+
+        Country country2 = countryRepository.findByCode("CN");
+        System.out.println("第二次查询：" + country2.getName());
     }
 }

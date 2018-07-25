@@ -4,15 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.haru.mybatis.dto.ResultDto;
-import com.haru.mybatis.enu.ErrorEnum;
-import com.haru.mybatis.exception.CustomException;
+import com.haru.mybatis.enumPackage.ErrorEnum;
 import com.haru.mybatis.model.City;
 import com.haru.mybatis.model.Country;
 import com.haru.mybatis.model.vo.CityVo;
 import com.haru.mybatis.service.CountryService;
 import com.haru.mybatis.util.GsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -106,5 +104,10 @@ public class CountryController {
         ResultDto<Country> resultDto = new ResultDto<Country>(String.valueOf(ErrorEnum.成功.getValue()), ErrorEnum.成功.name(), countryService.updateCountryWithCity(country));
         String json = getGson().toJson(resultDto);
         return json;
+    }
+
+    @RequestMapping(value = "/redisCountry", method = RequestMethod.GET, produces = "application/json; charset=utf-8")
+    public void redisCountry() {
+        countryService.redisCountry();
     }
 }

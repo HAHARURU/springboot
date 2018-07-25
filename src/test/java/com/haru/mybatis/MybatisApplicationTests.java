@@ -7,8 +7,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cache.CacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,10 +48,10 @@ public class MybatisApplicationTests {
         Country country2 = countryRepository.findByCode("CN");
         System.out.println("第二次查询：" + country2.getName());
 
-        country.setName("中华");
-        countryRepository.save(country);
-
-        Country country3 = countryRepository.findByCode("CN");
-        System.out.println("第三次查询：" + country3.getName());
+//        country.setName("中华");
+//        countryRepository.save(country);
+//
+//        Country country3 = countryRepository.findByCode("CN");
+//        System.out.println("第三次查询：" + country3.getName());
     }
 }

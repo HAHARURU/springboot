@@ -1,7 +1,7 @@
 package com.haru.mybatis.util;
 
 import com.google.gson.*;
-import com.haru.mybatis.enu.ErrorEnum;
+import com.haru.mybatis.enumPackage.ErrorEnum;
 import com.haru.mybatis.exception.CustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

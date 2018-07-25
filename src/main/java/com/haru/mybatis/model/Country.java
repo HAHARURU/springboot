@@ -1,6 +1,6 @@
 package com.haru.mybatis.model;
 
-import com.haru.mybatis.enu.StateEnum;
+import com.haru.mybatis.enumPackage.StateEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;

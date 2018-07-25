@@ -1,4 +1,4 @@
-package com.haru.mybatis.enu;
+package com.haru.mybatis.enumPackage;
 
 /**
  * @author HARU
