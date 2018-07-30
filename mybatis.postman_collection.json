@@ -1,0 +1,185 @@
+{
+	"info": {
+		"_postman_id": "994d5fa4-2931-4552-9f8c-27ef1d57f183",
+		"name": "mybatis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:4001/country/findAll",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "paramsJSON",
+							"value": "{\"page\":\"1\",\"size\":\"2\",\"name\":\"法国\"}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/findAll"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "countryJSON",
+							"value": "{\"id\":\"054028e3-ccdd-4fc1-a40a-4b7b0377087c\",\"name\":\"加拿大\",\"code\":\"ZN\",\"createTime\":\"2018-05-25 12:22\",\"continent\",\"3\"}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/save"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/getCity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "paramsJSON",
+							"value": "{\"cityName\": \"上海\"}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/getCity"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/getCity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cityJSON",
+							"value": "{\"names\":[\"上海\"]}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/getCity"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/getAllCountries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": "http://localhost:4001/country/redisCountry"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/insertCity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "cityJSON",
+							"value": "{\"cityName\":\"东京\",\"description\":\"otaku\",\"country\":{\"name\":\"日本\",\"code\":\"JP\",\"state\":\"启用\"}}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/insertCity"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/insertCountry",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "countryJSON",
+							"value": "{\"name\":\"英国\",\"code\":\"UK\",\"state\":\"启用\"}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/insertCountry"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/updateCountryWithCity",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "countryJSON",
+						"value": "{\"id\":\"4a937e7c-c988-4b23-94c0-0cac9df568b2\",\"name\":\"美国\",\"code\":\"USA\",\"state\":\"启用\",\"createTime\":\"2018-07-16 14:17:58\",\"valid\":false,\"cities\":[{\"id\":\"ffad506d-c82b-4b2d-9c45-7ab357496dde\",\"cityName\":\"纽约\",\"description\":\"NY\"},{\"id\":\"e0527c9b-7c0f-4ce0-b052-600769a087b0\",\"cityName\":\"华盛顿\"}]}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "countryJSON",
+							"value": "{\"version\":\"0\",\"id\":\"4a937e7c-c988-4b23-94c0-0cac9df568b2\",\"name\":\"美国\",\"code\":\"USA\",\"state\":\"启用\",\"createTime\":\"2018-07-16 14:17:58\",\"valid\":false,\"cities\":[{\"id\":\"ffad506d-c82b-4b2d-9c45-7ab357496dde\",\"cityName\":\"纽约\",\"description\":\"NY\"},{\"id\":\"e0527c9b-7c0f-4ce0-b052-600769a087b0\",\"cityName\":\"华盛顿\"}]}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/updateCountryWithCity"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:4001/country/insertCountryOnly",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "countryJSON",
+							"value": "{\"id\":\"4a937e7c-c988-4b23-94c0-0cac9df568b3\",\"name\":\"英国\",\"code\":\"UK\",\"state\":\"启用\",\"createTime\":\"2018-07-17 15:17:58\",\"valid\":true}",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:4001/country/insertCountryOnly"
+			},
+			"response": []
+		}
+	]
+}

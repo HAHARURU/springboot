@@ -1,4 +1,4 @@
-package com.haru.mybatis.Controller;
+package com.haru.mybatis.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

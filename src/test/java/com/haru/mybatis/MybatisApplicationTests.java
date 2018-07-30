@@ -1,9 +1,16 @@
 package com.haru.mybatis;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.haru.mybatis.model.Country;
 import com.haru.mybatis.mongoRepository.CountryMongoRepository;
 import com.haru.mybatis.repository.CountryRepository;
 import com.haru.mybatis.schedule.AsyncTask;
+import com.haru.mybatis.util.GsonView;
+import com.haru.mybatis.util.encryption.MD5;
+import com.haru.mybatis.util.encryption.SortCollection;
+import com.haru.mybatis.util.http.HashUtils;
 import com.haru.mybatis.util.http.HttpUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,10 +19,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.Future;
 
 @RunWith(SpringRunner.class)
@@ -30,6 +40,17 @@ public class MybatisApplicationTests {
 
     @Autowired
     private AsyncTask asyncTask;
+
+    private Gson gson;
+
+    private Gson getGson() {
+        if (gson == null) {
+            GsonBuilder gb = new GsonBuilder();
+            GsonView.regGson(gb);
+            gson = gb.create();
+        }
+        return gson;
+    }
 
     @Test
     public void contextLoads() {
@@ -87,27 +108,45 @@ public class MybatisApplicationTests {
 //            e.printStackTrace();
 //        }
 
-        try {
-//            asyncTask.doTaskOnePool();
-//            asyncTask.doTaskTwoPool();
-//            asyncTask.doTaskThreePool();
+//        try {
+////            asyncTask.doTaskOnePool();
+////            asyncTask.doTaskTwoPool();
+////            asyncTask.doTaskThreePool();
+////
+////            Thread.currentThread().join();
+////
+////            System.out.println("任务全部完成");
 //
-//            Thread.currentThread().join();
+//            for (int i = 0; i < 10; i++) {
+//                asyncTask.doTaskOnePool();
+//                asyncTask.doTaskTwoPool();
+//                asyncTask.doTaskThreePool();
 //
-//            System.out.println("任务全部完成");
+//                if (i == 9) {
+//                    System.exit(0);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-            for (int i = 0; i < 10; i++) {
-                asyncTask.doTaskOnePool();
-                asyncTask.doTaskTwoPool();
-                asyncTask.doTaskThreePool();
+        Map<String, String> params = new HashMap<>();
+        String body = "{\"id\":\"4a937e7c-c988-4b23-94c0-0cac9df568b9\",\"name\":\"法国\",\"code\":\"FN\",\"state\":\"启用\",\"createTime\":\"2018-07-30 15:17:58\",\"valid\":true}";
 
-                if (i == 9) {
-                    System.exit(0);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        params = getGson().fromJson(body, new TypeToken<Map<String, Object>>() {
+        }.getType());
+        params.put("MD5key", "haruKey");
+
+//        ConcurrentSkipListMap cbody = new ConcurrentSkipListMap();
+//        cbody.putAll(params);
+//        String sourceStr = SortCollection.sort(null, cbody);    //排序
+//        String sign = MD5.sign(sourceStr, "haruKey", "UTF-8");      //加密
+//        params.clear();
+//        params.put("sign", sign);
+
+        String post = HttpUtils.post("http://localhost:4001/country/insertCountryOnly", HashUtils.getMap("Content-type", "application/json;charset=UTF-8"),
+                params, "UTF-8", body);
+        System.out.println(post);
 
     }
 }

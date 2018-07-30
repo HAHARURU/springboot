@@ -128,7 +128,7 @@ public class HttpUtils {
         try {
             client = new HttpClient(new HttpClientParams(), new SimpleHttpConnectionManager(true));
             client.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
-            method = new PostMethod(url);
+            method = new PostMethod();
             method.setRequestHeader("Connection", "close");
             // 增加头信息
             if (null != headers) {
@@ -140,13 +140,18 @@ public class HttpUtils {
                 MultiValueMap<String, String> paramsMulti = new LinkedMultiValueMap<String, String>();
                 ConcurrentSkipListMap cbody = new ConcurrentSkipListMap();
                 for (String key : params.keySet()) {
-                    paramsMulti.add(key, HashUtils.getStringValue(params, key));
+                    if (!"MD5key".equals(key) && !"appsecret".equals(key)) {
+                        paramsMulti.add(key, HashUtils.getStringValue(params, key));
+                    }
                 }
                 cbody.putAll(paramsMulti);
-                String sourceStr = SortCollection.sort(null, cbody);    //排序
-                String sign = MD5.sign(sourceStr, "", "");  //加密
+                String sourceStr = SortCollection.sort(HashUtils.getStringValue(params, "appsecret"), cbody);    //排序
+                String sign = MD5.sign(sourceStr, HashUtils.getStringValue(params, "MD5key"), "UTF-8");     //加密
+                paramsMulti.clear();
+                paramsMulti.add("sign", sign);
                 url = UriComponentsBuilder.fromHttpUrl(url).queryParams(paramsMulti).build().toUriString(); //生成地址
             }
+            method = new PostMethod(url);
             if (StringUtils.isNotBlank(body)) {
                 method.setRequestBody(body);    //设置body会清空method.addParameter(nvp)的设置
             }

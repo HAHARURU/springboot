@@ -19,7 +19,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 //@EnableAsync
 @MapperScan(basePackages = {"com.haru.mybatis.mapper", "com.haru.mybatis.advice"}) //扫描统一异常包
 public class MybatisApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(MybatisApplication.class, args);
     }

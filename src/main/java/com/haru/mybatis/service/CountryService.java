@@ -2,6 +2,7 @@ package com.haru.mybatis.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.haru.mybatis.annotation.SignAnnotation;
 import com.haru.mybatis.enumPackage.ErrorEnum;
 import com.haru.mybatis.exception.CustomException;
 import com.haru.mybatis.mapper.CityMapper;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,6 +56,10 @@ public class CountryService {
             gson = gb.create();
         }
         return gson;
+    }
+
+    @SignAnnotation
+    public void validateSign(HttpServletRequest request, String countryJSON) {
     }
 
     @Transactional
