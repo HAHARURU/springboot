@@ -11,7 +11,8 @@ public enum ErrorEnum {
     保存失败(303),
     不存在无法保存(304),
     更新失败(305),
-    签名错误(306);
+    签名错误(306),
+    失败(100);
     int value;
 
     ErrorEnum(int value) {

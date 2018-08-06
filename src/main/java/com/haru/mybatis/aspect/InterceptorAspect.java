@@ -47,7 +47,7 @@ public class InterceptorAspect implements Ordered {
         return 0;
     }
 
-    @Pointcut("target(com.haru.mybatis.service.CountryService) && @annotation(com.haru.mybatis.annotation.SignAnnotation)")
+    @Pointcut("target(com.haru.mybatis.service.imp.CountryServiceImp) && @annotation(com.haru.mybatis.annotation.SignAnnotation)")
     private void validateSign() {
     }
 

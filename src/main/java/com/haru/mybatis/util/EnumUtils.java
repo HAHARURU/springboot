@@ -21,7 +21,7 @@ public class EnumUtils {
      * @return
      * @throws Exception 转换错误
      */
-    static Enum getEnum(Class enumCls, String text) {
+    public static Enum getEnum(Class enumCls, String text) {
         try {
             for (Object o : enumCls.getEnumConstants()) {
                 if (o.toString().equals(text)) {
@@ -43,7 +43,7 @@ public class EnumUtils {
      * @return
      * @throws Exception 转换错误
      */
-    static Enum getEnum(Class enumCls, int value) {
+    public static Enum getEnum(Class enumCls, int value) {
         try {
             Field valueField = enumCls.getDeclaredField("value");
             ReflectionUtils.makeAccessible(valueField);

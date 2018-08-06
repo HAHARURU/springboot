@@ -15,6 +15,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletInputStream;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.InputStream;
@@ -43,32 +44,31 @@ public class MyInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        Map<String, String[]> parameterMap = httpServletRequest.getParameterMap();
-
-        ServletInputStream inputStream = httpServletRequest.getInputStream();
-        int contentLength = httpServletRequest.getContentLength();
-        byte[] bytes = new byte[contentLength];
-        inputStream.read(bytes, 0, contentLength);
-        String json = new String(bytes, "UTF-8");
-        logger.info(json);
-        Map<String, String> params = getGson().fromJson(json, new TypeToken<Map<String, Object>>() {
-        }.getType());
-
-        ConcurrentSkipListMap cbody = new ConcurrentSkipListMap();
-        cbody.putAll(params);
-        String sourceStr = SortCollection.sort(null, cbody);    //排序
-        String sign = MD5.sign(sourceStr, "haruKey", "UTF-8");      //加密
-        if (parameterMap != null && parameterMap.size() > 0 && parameterMap.get("sign").length > 0 &&
-                StringUtils.isNotEmpty(parameterMap.get("sign")[0]) && parameterMap.get("sign")[0].equals(sign)) {
+//        Map<String, String[]> parameterMap = httpServletRequest.getParameterMap();
+//
+//        ServletInputStream inputStream = httpServletRequest.getInputStream();
+//        int contentLength = httpServletRequest.getContentLength();
+//        byte[] bytes = new byte[contentLength];
+//        inputStream.read(bytes, 0, contentLength);
+//        String json = new String(bytes, "UTF-8");
+//        logger.info(json);
+//        Map<String, String> params = getGson().fromJson(json, new TypeToken<Map<String, Object>>() {
+//        }.getType());
+//
+//        ConcurrentSkipListMap cbody = new ConcurrentSkipListMap();
+//        cbody.putAll(params);
+//        String sourceStr = SortCollection.sort(null, cbody);    //排序
+//        String sign = MD5.sign(sourceStr, "haruKey", "UTF-8");      //加密
+//        if (parameterMap != null && parameterMap.size() > 0 && parameterMap.get("sign").length > 0 &&
+//                StringUtils.isNotEmpty(parameterMap.get("sign")[0]) && parameterMap.get("sign")[0].equals(sign)) {
             return true;
-        } else {
-            throw new CustomException(ErrorEnum.更新失败.toString(), String.valueOf(ErrorEnum.更新失败.getValue()));
-        }
+//        } else {
+//            throw new CustomException(ErrorEnum.更新失败.toString(), String.valueOf(ErrorEnum.更新失败.getValue()));
+//        }
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-
     }
 
     @Override

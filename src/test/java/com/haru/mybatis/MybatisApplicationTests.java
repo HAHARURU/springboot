@@ -7,6 +7,7 @@ import com.haru.mybatis.model.Country;
 import com.haru.mybatis.mongoRepository.CountryMongoRepository;
 import com.haru.mybatis.repository.CountryRepository;
 import com.haru.mybatis.schedule.AsyncTask;
+import com.haru.mybatis.service.CountryService;
 import com.haru.mybatis.util.GsonView;
 import com.haru.mybatis.util.encryption.MD5;
 import com.haru.mybatis.util.encryption.SortCollection;
@@ -17,11 +18,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.CacheManager;
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,8 +56,26 @@ public class MybatisApplicationTests {
         return gson;
     }
 
+    public void test(String arr) {
+
+    }
+
     @Test
     public void contextLoads() {
+        Method method = null;
+        try {
+//            LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+            method = CountryService.class.getMethod( "test", String.class, Integer.class );
+//            String[] parameterNames = u.getParameterNames(method);
+            for( final Parameter parameter: method.getParameters()) {
+                System.out.println( "Parameter: " + parameter.getName() );
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+
+
 //        FTPUtils ftpUtils = new FTPUtils("Administrator", "123", "192.168.90.11", 21);
 //        ftpUtils.connectServer(false);
 //        ftpUtils.mkdir("m2/m12/m112");
@@ -130,12 +152,12 @@ public class MybatisApplicationTests {
 //            e.printStackTrace();
 //        }
 
-        Map<String, String> params = new HashMap<>();
-        String body = "{\"id\":\"4a937e7c-c988-4b23-94c0-0cac9df568b9\",\"name\":\"法国\",\"code\":\"FN\",\"state\":\"启用\",\"createTime\":\"2018-07-30 15:17:58\",\"valid\":true}";
-
-        params = getGson().fromJson(body, new TypeToken<Map<String, Object>>() {
-        }.getType());
-        params.put("MD5key", "haruKey");
+//        Map<String, String> params = new HashMap<>();
+//        String body = "{\"id\":\"4a937e7c-c988-4b23-94c0-0cac9df568b9\",\"name\":\"法国\",\"code\":\"FN\",\"state\":\"启用\",\"createTime\":\"2018-07-30 15:17:58\",\"valid\":true}";
+//
+//        params = getGson().fromJson(body, new TypeToken<Map<String, Object>>() {
+//        }.getType());
+//        params.put("MD5key", "haruKey");
 
 //        ConcurrentSkipListMap cbody = new ConcurrentSkipListMap();
 //        cbody.putAll(params);
@@ -144,9 +166,9 @@ public class MybatisApplicationTests {
 //        params.clear();
 //        params.put("sign", sign);
 
-        String post = HttpUtils.post("http://localhost:4001/country/insertCountryOnly", HashUtils.getMap("Content-type", "application/json;charset=UTF-8"),
-                params, "UTF-8", body);
-        System.out.println(post);
+//        String post = HttpUtils.post("http://localhost:4001/country/insertCountryOnly", HashUtils.getMap("Content-type", "application/json;charset=UTF-8"),
+//                params, "UTF-8", body);
+//        System.out.println(post);
 
     }
 }
