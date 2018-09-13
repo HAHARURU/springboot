@@ -58,17 +58,17 @@ public class MybatisApplicationTests {
         return gson;
     }
 
-    private boolean testThread(String no) {
-        System.out.println("主线程开始" + no);
+    private String testThread(String no) {
+        System.out.println("子线程开始" + no);
         try {
             Thread.sleep(3000);
-            String s = null;
-            s.toString();
+//            String s = null;
+//            s.toString();
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return "";
         }
-        return true;
+        return no;
     }
 
     @Test
@@ -76,17 +76,37 @@ public class MybatisApplicationTests {
         //多线程测试
         System.out.println("主线程开始");
 
-        CompletableFuture<Boolean> booleanCompletableFuture1 = CompletableFuture.supplyAsync(() -> this.testThread("01"));
+        CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(() -> this.testThread("01"));
+//        CompletableFuture<String> completableFuture2 = CompletableFuture.supplyAsync(() -> this.testThread("02"));
 
-        CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(booleanCompletableFuture1);
+//        CompletableFuture<Void> completableFuture = CompletableFuture.allOf(completableFuture1);
 
-        voidCompletableFuture.join();
+//        completableFuture.join();//等待子线程执行结束
+//        if (booleanCompletableFuture1.get()) {    //get方法会阻塞主线程，但是allOf无效
+//            System.out.println("主线程结束");
+//        } else {
+//            System.out.println("子线程出错");
+//        }
 
-        if (booleanCompletableFuture1.get()) {
-            System.out.println("所有任务执行完成");
-        } else {
-            System.out.println("子线程出错");
-        }
+//        CompletableFuture<Object> objectCompletableFuture = CompletableFuture.anyOf(completableFuture1, completableFuture2);
+//
+//        System.out.println(objectCompletableFuture.get());
+//
+//        CompletableFuture<String> stringCompletableFuture = completableFuture1.thenCompose(reuslt -> CompletableFuture.supplyAsync(()
+//                -> this.testThread(reuslt + "-1")));
+//        System.out.println(stringCompletableFuture.get());
+//
+//        stringCompletableFuture.join();
+
+//        CompletableFuture<String> stringCompletableFuture = completableFuture1.thenCombine(CompletableFuture.supplyAsync(() -> this.testThread
+//                ("03")), (result1, result2) -> result1 + result2);
+//
+//        System.out.println(stringCompletableFuture.get());
+
+        System.out.println(completableFuture1.get());
+        completableFuture1.thenAccept(result ->  System.out.println(result + "@"));
+
+        System.out.println("主线程开始结束");
 
 
 //        Method method = null;
