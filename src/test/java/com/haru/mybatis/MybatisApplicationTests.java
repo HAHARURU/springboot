@@ -29,7 +29,9 @@ import java.lang.reflect.Parameter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @RunWith(SpringRunner.class)
@@ -56,23 +58,48 @@ public class MybatisApplicationTests {
         return gson;
     }
 
-    public void test(String arr) {
-
+    private boolean testThread(String no) {
+        System.out.println("主线程开始" + no);
+        try {
+            Thread.sleep(3000);
+            String s = null;
+            s.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Test
-    public void contextLoads() {
-        Method method = null;
-        try {
-//            LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
-            method = CountryService.class.getMethod( "test", String.class, Integer.class );
-//            String[] parameterNames = u.getParameterNames(method);
-            for( final Parameter parameter: method.getParameters()) {
-                System.out.println( "Parameter: " + parameter.getName() );
-            }
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+    public void contextLoads() throws ExecutionException, InterruptedException {
+        //多线程测试
+        System.out.println("主线程开始");
+
+        CompletableFuture<Boolean> booleanCompletableFuture1 = CompletableFuture.supplyAsync(() -> this.testThread("01"));
+
+        CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(booleanCompletableFuture1);
+
+        voidCompletableFuture.join();
+
+        if (booleanCompletableFuture1.get()) {
+            System.out.println("所有任务执行完成");
+        } else {
+            System.out.println("子线程出错");
         }
+
+
+//        Method method = null;
+//        try {
+////            LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
+//            method = CountryService.class.getMethod( "test", String.class, Integer.class );
+////            String[] parameterNames = u.getParameterNames(method);
+//            for( final Parameter parameter: method.getParameters()) {
+//                System.out.println( "Parameter: " + parameter.getName() );
+//            }
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//        }
 
 
 
