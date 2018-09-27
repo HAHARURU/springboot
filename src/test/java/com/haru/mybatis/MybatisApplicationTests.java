@@ -29,6 +29,7 @@ import java.lang.reflect.Parameter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.ExecutionException;
@@ -73,10 +74,15 @@ public class MybatisApplicationTests {
 
     @Test
     public void contextLoads() throws ExecutionException, InterruptedException {
-        //多线程测试
-        System.out.println("主线程开始");
 
-        CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(() -> this.testThread("01"));
+        String s = null;
+        Optional<String> s2 = Optional.ofNullable(s);
+        s2.ifPresent(v -> Optional.ofNullable(v.toUpperCase()).ifPresent(v2 -> Optional.ofNullable(v.length()).ifPresent(v3 -> System.out.println(v3))));
+
+//        //多线程测试
+//        System.out.println("主线程开始");
+//
+//        CompletableFuture<String> completableFuture1 = CompletableFuture.supplyAsync(() -> this.testThread("01"));
 //        CompletableFuture<String> completableFuture2 = CompletableFuture.supplyAsync(() -> this.testThread("02"));
 
 //        CompletableFuture<Void> completableFuture = CompletableFuture.allOf(completableFuture1);
@@ -103,10 +109,10 @@ public class MybatisApplicationTests {
 //
 //        System.out.println(stringCompletableFuture.get());
 
-        System.out.println(completableFuture1.get());
-        completableFuture1.thenAccept(result ->  System.out.println(result + "@"));
-
-        System.out.println("主线程开始结束");
+//        System.out.println(completableFuture1.get());
+//        completableFuture1.thenAccept(result ->  System.out.println(result + "@"));
+//
+//        System.out.println("主线程开始结束");
 
 
 //        Method method = null;
