@@ -6,4 +6,6 @@ package com.haru.mybatis.service;
  */
 public interface CountryService {
     String test(String name, Integer age);
+
+    void updateCy();
 }

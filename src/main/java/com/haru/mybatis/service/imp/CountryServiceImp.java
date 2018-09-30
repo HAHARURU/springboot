@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author HARU
@@ -162,5 +163,32 @@ public class CountryServiceImp implements CountryService {
 
         Country country2 = countryRepository.findByCode("CN");
         System.out.println("第二次查询：" + country2.getName());
+    }
+
+    private Country updateCountry(String name) {
+        Country country = countryRepository.findByCode("CN");
+        country.setName("中国2");
+        return countryRepository.save(country);
+    }
+
+    @Transactional
+    public void updateCy() {
+        // 1、最后主线程事务提交会因为乐观锁version不正确而导致主线程出错
+//        Country country = countryRepository.findByCode("CN");
+//        country.setName("中国4");
+//        countryRepository.save(country);
+//        CompletableFuture<Country> cn = CompletableFuture.supplyAsync(() -> this.updateCountry("CN"));
+//        CompletableFuture<Void> objectCompletableFuture = CompletableFuture.allOf(cn);
+//        objectCompletableFuture.join();
+//        logger.info("");
+
+        // 正确的处理
+        CompletableFuture<Country> cn = CompletableFuture.supplyAsync(() -> this.updateCountry("CN"));
+        CompletableFuture<Void> objectCompletableFuture = CompletableFuture.allOf(cn);
+        objectCompletableFuture.join();
+        Country country = countryRepository.findByCode("CN");
+        country.setName("中国4");
+        countryRepository.save(country);
+        logger.info("");
     }
 }
