@@ -1,4 +1,8 @@
-package com.haru.mybatis.pattern;
+package com.haru.mybatis.pattern.simple;
+
+import com.haru.mybatis.pattern.Circle;
+import com.haru.mybatis.pattern.Shape;
+import com.haru.mybatis.pattern.Triangle;
 
 import java.util.Optional;
 
