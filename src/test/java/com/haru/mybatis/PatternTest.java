@@ -1,6 +1,9 @@
 package com.haru.mybatis;
 
 import com.haru.mybatis.pattern.Shape;
+import com.haru.mybatis.pattern.abstarcted.Color;
+import com.haru.mybatis.pattern.abstarcted.RedCircleFactory;
+import com.haru.mybatis.pattern.abstarcted.ShapeColorFactory;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
 import com.haru.mybatis.pattern.simple.ShapeFactory;
@@ -22,13 +25,22 @@ public class PatternTest {
         triangle.draw();
     }
 
-        @Test
-        public void factoryTest() {
-            com.haru.mybatis.pattern.factory.ShapeFactory circleFactory = new CircleFactory();
-            Shape circle = circleFactory.createShape();
-            circle.draw();
-            com.haru.mybatis.pattern.factory.ShapeFactory triangleFactory = new TriangleFactory();
-            Shape triangle = triangleFactory.createShape();
-            triangle.draw();
-        }
+    @Test
+    public void factoryTest() {
+        com.haru.mybatis.pattern.factory.ShapeFactory circleFactory = new CircleFactory();
+        Shape circle = circleFactory.createShape();
+        circle.draw();
+        com.haru.mybatis.pattern.factory.ShapeFactory triangleFactory = new TriangleFactory();
+        Shape triangle = triangleFactory.createShape();
+        triangle.draw();
+    }
+
+    @Test
+    public void abstractTest() {
+        ShapeColorFactory redCircleFactory  = new RedCircleFactory();
+        Color red = redCircleFactory.createColor();
+        Shape circle = redCircleFactory.createShape();
+        red.paint();
+        circle.draw();
+    }
 }
