@@ -4,6 +4,10 @@ import com.haru.mybatis.pattern.Shape;
 import com.haru.mybatis.pattern.abstarcted.Color;
 import com.haru.mybatis.pattern.abstarcted.RedCircleFactory;
 import com.haru.mybatis.pattern.abstarcted.ShapeColorFactory;
+import com.haru.mybatis.pattern.builder.Actor;
+import com.haru.mybatis.pattern.builder.ActorBuilder;
+import com.haru.mybatis.pattern.builder.ActorDirector;
+import com.haru.mybatis.pattern.builder.SaberBuilder;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
 import com.haru.mybatis.pattern.simple.ShapeFactory;
@@ -42,5 +46,13 @@ public class PatternTest {
         Shape circle = redCircleFactory.createShape();
         red.paint();
         circle.draw();
+    }
+
+    @Test
+    public void builderTest() {
+        ActorBuilder saberActor = new SaberBuilder();
+        ActorDirector actorDirector = new ActorDirector();
+        Actor saber = actorDirector.createActor(saberActor);
+        System.out.println(saber.toString());
     }
 }
