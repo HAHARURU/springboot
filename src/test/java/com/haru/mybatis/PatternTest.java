@@ -8,6 +8,8 @@ import com.haru.mybatis.pattern.builder.Actor;
 import com.haru.mybatis.pattern.builder.ActorBuilder;
 import com.haru.mybatis.pattern.builder.ActorDirector;
 import com.haru.mybatis.pattern.builder.SaberBuilder;
+import com.haru.mybatis.pattern.decorator.Benz;
+import com.haru.mybatis.pattern.decorator.TailCarDecorator;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
 import com.haru.mybatis.pattern.prototype.Attachment;
@@ -78,5 +80,12 @@ public class PatternTest {
         Car cloneCar = car.clone();
         System.out.println("car是否相同：" + (car == cloneCar));
         System.out.println("driver是否相同：" + (car.getDriver() == cloneCar.getDriver()));
+    }
+
+    @Test
+    public void decoratorTest() {
+        com.haru.mybatis.pattern.decorator.Car benz = new Benz();
+        TailCarDecorator tailCarDecorator = new TailCarDecorator(benz);
+        tailCarDecorator.make();
     }
 }
