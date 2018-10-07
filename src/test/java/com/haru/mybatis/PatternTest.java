@@ -10,6 +10,10 @@ import com.haru.mybatis.pattern.builder.ActorDirector;
 import com.haru.mybatis.pattern.builder.SaberBuilder;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
+import com.haru.mybatis.pattern.prototype.Attachment;
+import com.haru.mybatis.pattern.prototype.Car;
+import com.haru.mybatis.pattern.prototype.Driver;
+import com.haru.mybatis.pattern.prototype.Order;
 import com.haru.mybatis.pattern.simple.ShapeFactory;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,7 +45,7 @@ public class PatternTest {
 
     @Test
     public void abstractTest() {
-        ShapeColorFactory redCircleFactory  = new RedCircleFactory();
+        ShapeColorFactory redCircleFactory = new RedCircleFactory();
         Color red = redCircleFactory.createColor();
         Shape circle = redCircleFactory.createShape();
         red.paint();
@@ -54,5 +58,25 @@ public class PatternTest {
         ActorDirector actorDirector = new ActorDirector();
         Actor saber = actorDirector.createActor(saberActor);
         System.out.println(saber.toString());
+    }
+
+    @Test
+    public void prototypeTest() {
+        Order oldOrder = new Order();
+        Attachment attachment = new Attachment();
+        oldOrder.setAttachment(attachment);
+        Order cloneOrder = oldOrder.clone();
+        System.out.println("order是否相同：" + (oldOrder == cloneOrder));
+        System.out.println("attachment是否相同：" + (oldOrder.getAttachment() == cloneOrder.getAttachment()));
+    }
+
+    @Test
+    public void deepCloneTest() {
+        Driver driver = new Driver();
+        Car car = new Car();
+        car.setDriver(driver);
+        Car cloneCar = car.clone();
+        System.out.println("car是否相同：" + (car == cloneCar));
+        System.out.println("driver是否相同：" + (car.getDriver() == cloneCar.getDriver()));
     }
 }
