@@ -5,7 +5,7 @@ package com.haru.mybatis.pattern.decorator;
  * @since 2018/10/7
  */
 public abstract class CarDecorator implements Car {
-    Car car;
+    protected Car car;
 
     public CarDecorator(Car car) {
         this.car = car;

@@ -4,6 +4,7 @@ import com.haru.mybatis.pattern.Shape;
 import com.haru.mybatis.pattern.abstarcted.Color;
 import com.haru.mybatis.pattern.abstarcted.RedCircleFactory;
 import com.haru.mybatis.pattern.abstarcted.ShapeColorFactory;
+import com.haru.mybatis.pattern.adapter.*;
 import com.haru.mybatis.pattern.builder.Actor;
 import com.haru.mybatis.pattern.builder.ActorBuilder;
 import com.haru.mybatis.pattern.builder.ActorDirector;
@@ -87,5 +88,32 @@ public class PatternTest {
         com.haru.mybatis.pattern.decorator.Car benz = new Benz();
         TailCarDecorator tailCarDecorator = new TailCarDecorator(benz);
         tailCarDecorator.make();
+    }
+
+    @Test
+    public void classAdapterTest() {
+        DC5 voltageAdapter = new VoltageAdapter();
+        voltageAdapter.charge5V();
+    }
+
+    @Test
+    public void objectAdapterTest() {
+        ObjectVoltageAdapter objectVoltageAdapter = new ObjectVoltageAdapter(new AC220());
+        objectVoltageAdapter.charge5V();
+    }
+
+    @Test
+    public void interfaceAdapterTest() {
+        Voltage5VAdapter voltage5VAdapter = new Voltage5VAdapter(new AC220());
+        voltage5VAdapter.charge5V();
+
+        InterfaceVoltageAdapter interfaceVoltageAdapter = new InterfaceVoltageAdapter(new AC220()) {
+            @Override
+            public void charge9V() {
+                sourceVoltage.charge();
+                System.out.println("change DC9V");
+            }
+        };
+        interfaceVoltageAdapter.charge9V();
     }
 }
