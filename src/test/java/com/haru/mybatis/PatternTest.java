@@ -17,9 +17,12 @@ import com.haru.mybatis.pattern.prototype.Attachment;
 import com.haru.mybatis.pattern.prototype.Car;
 import com.haru.mybatis.pattern.prototype.Driver;
 import com.haru.mybatis.pattern.prototype.Order;
+import com.haru.mybatis.pattern.proxy.*;
 import com.haru.mybatis.pattern.simple.ShapeFactory;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.lang.reflect.Proxy;
 
 /**
  * @author HARU
@@ -115,5 +118,26 @@ public class PatternTest {
             }
         };
         interfaceVoltageAdapter.charge9V();
+    }
+
+    @Test
+    public void proxyTest() {
+        HouseProxy houseProxy = new HouseProxy(new HouseImpl());
+        houseProxy.buy();
+    }
+
+    @Test
+    public void DynamicProxyTest() {
+        House house = (House) Proxy.newProxyInstance(House.class.getClassLoader(), new Class[]{House.class}, new
+                DynamicProxyHandler(new HouseImpl()));
+        house.buy();
+    }
+
+    @Test
+    public void CglibProxyTest() {
+        CglibProxy cglibProxy = new CglibProxy();
+        com.haru.mybatis.pattern.proxy.Car car = (com.haru.mybatis.pattern.proxy.Car) cglibProxy.getInstance(com
+                .haru.mybatis.pattern.proxy.Car.class);
+        car.buy();
     }
 }

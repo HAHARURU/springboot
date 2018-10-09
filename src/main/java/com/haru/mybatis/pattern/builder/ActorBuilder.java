@@ -5,7 +5,11 @@ package com.haru.mybatis.pattern.builder;
  * @since 2018/10/5
  */
 public abstract class ActorBuilder {
-    Actor actor = new Actor();
+    Actor actor;
+
+    public ActorBuilder() {
+        this.actor = new Actor();
+    }
 
     public abstract void buildRole();
     public abstract void buildSex();
