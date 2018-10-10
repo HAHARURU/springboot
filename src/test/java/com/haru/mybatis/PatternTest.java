@@ -5,6 +5,8 @@ import com.haru.mybatis.pattern.abstarcted.Color;
 import com.haru.mybatis.pattern.abstarcted.RedCircleFactory;
 import com.haru.mybatis.pattern.abstarcted.ShapeColorFactory;
 import com.haru.mybatis.pattern.adapter.*;
+import com.haru.mybatis.pattern.bridge.Circle;
+import com.haru.mybatis.pattern.bridge.Red;
 import com.haru.mybatis.pattern.builder.Actor;
 import com.haru.mybatis.pattern.builder.ActorBuilder;
 import com.haru.mybatis.pattern.builder.ActorDirector;
@@ -139,5 +141,11 @@ public class PatternTest {
         com.haru.mybatis.pattern.proxy.Car car = (com.haru.mybatis.pattern.proxy.Car) cglibProxy.getInstance(com
                 .haru.mybatis.pattern.proxy.Car.class);
         car.buy();
+    }
+
+    @Test
+    public void BridgeTest() {
+        com.haru.mybatis.pattern.bridge.Shape circle = new Circle(new Red());
+        circle.draw();
     }
 }
