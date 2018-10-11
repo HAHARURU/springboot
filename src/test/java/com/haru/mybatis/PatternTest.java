@@ -13,6 +13,7 @@ import com.haru.mybatis.pattern.builder.ActorDirector;
 import com.haru.mybatis.pattern.builder.SaberBuilder;
 import com.haru.mybatis.pattern.decorator.Benz;
 import com.haru.mybatis.pattern.decorator.TailCarDecorator;
+import com.haru.mybatis.pattern.facade.Facade;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
 import com.haru.mybatis.pattern.prototype.Attachment;
@@ -147,5 +148,11 @@ public class PatternTest {
     public void BridgeTest() {
         com.haru.mybatis.pattern.bridge.Shape circle = new Circle(new Red());
         circle.draw();
+    }
+
+    @Test
+    public void FacadeTest() {
+        Facade facade = new Facade();
+        facade.run();
     }
 }
