@@ -22,6 +22,9 @@ import com.haru.mybatis.pattern.prototype.Driver;
 import com.haru.mybatis.pattern.prototype.Order;
 import com.haru.mybatis.pattern.proxy.*;
 import com.haru.mybatis.pattern.simple.ShapeFactory;
+import com.haru.mybatis.pattern.strategy.AddMethod;
+import com.haru.mybatis.pattern.strategy.MathContext;
+import com.haru.mybatis.pattern.strategy.SubtractMethod;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -154,5 +157,13 @@ public class PatternTest {
     public void FacadeTest() {
         Facade facade = new Facade();
         facade.run();
+    }
+
+    @Test
+    public void StrategyTest() {
+        MathContext add = new MathContext(new AddMethod());
+        add.run();
+        MathContext subtract = new MathContext(new SubtractMethod());
+        subtract.run();
     }
 }
