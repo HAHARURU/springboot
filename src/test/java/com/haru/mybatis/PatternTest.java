@@ -11,11 +11,15 @@ import com.haru.mybatis.pattern.builder.Actor;
 import com.haru.mybatis.pattern.builder.ActorBuilder;
 import com.haru.mybatis.pattern.builder.ActorDirector;
 import com.haru.mybatis.pattern.builder.SaberBuilder;
+import com.haru.mybatis.pattern.composite.Folder;
+import com.haru.mybatis.pattern.composite.ImageFile;
+import com.haru.mybatis.pattern.composite.VideoFile;
 import com.haru.mybatis.pattern.decorator.Benz;
 import com.haru.mybatis.pattern.decorator.TailCarDecorator;
 import com.haru.mybatis.pattern.facade.Facade;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
+import com.haru.mybatis.pattern.flyweight.ShapeFlyweightFactory;
 import com.haru.mybatis.pattern.prototype.Attachment;
 import com.haru.mybatis.pattern.prototype.Car;
 import com.haru.mybatis.pattern.prototype.Driver;
@@ -165,5 +169,21 @@ public class PatternTest {
         add.run();
         MathContext subtract = new MathContext(new SubtractMethod());
         subtract.run();
+    }
+
+    @Test
+    public void CompositeTest() {
+        Folder folder = new Folder("admin");
+        folder.add(new ImageFile("logo"));
+        folder.add(new VideoFile("MV"));
+        folder.show();
+    }
+
+    @Test
+    public void FlyweightTest() {
+        Shape circleNew = ShapeFlyweightFactory.createShape(ShapeFlyweightFactory.CIRCLE);
+        circleNew.draw();
+        Shape circleGet = ShapeFlyweightFactory.createShape(ShapeFlyweightFactory.CIRCLE);
+        circleGet.draw();
     }
 }
