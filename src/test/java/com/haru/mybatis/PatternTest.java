@@ -29,6 +29,9 @@ import com.haru.mybatis.pattern.simple.ShapeFactory;
 import com.haru.mybatis.pattern.strategy.AddMethod;
 import com.haru.mybatis.pattern.strategy.MathContext;
 import com.haru.mybatis.pattern.strategy.SubtractMethod;
+import com.haru.mybatis.pattern.template.Dinner;
+import com.haru.mybatis.pattern.template.Kelp;
+import com.haru.mybatis.pattern.template.Potato;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -185,5 +188,13 @@ public class PatternTest {
         circleNew.draw();
         Shape circleGet = ShapeFlyweightFactory.createShape(ShapeFlyweightFactory.CIRCLE);
         circleGet.draw();
+    }
+
+    @Test
+    public void TemplateTest() {
+        Dinner potato = new Potato();
+        potato.mark();
+        Dinner kelp = new Kelp();
+        kelp.mark();
     }
 }
