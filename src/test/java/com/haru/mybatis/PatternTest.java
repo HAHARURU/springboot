@@ -20,6 +20,9 @@ import com.haru.mybatis.pattern.facade.Facade;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
 import com.haru.mybatis.pattern.flyweight.ShapeFlyweightFactory;
+import com.haru.mybatis.pattern.observer.Student;
+import com.haru.mybatis.pattern.observer.Weather;
+import com.haru.mybatis.pattern.observer.Worker;
 import com.haru.mybatis.pattern.prototype.Attachment;
 import com.haru.mybatis.pattern.prototype.Car;
 import com.haru.mybatis.pattern.prototype.Driver;
@@ -196,5 +199,17 @@ public class PatternTest {
         potato.mark();
         Dinner kelp = new Kelp();
         kelp.mark();
+    }
+
+    @Test
+    public void ObserverTest() {
+        Weather weather = new Weather();
+        Worker worker = new Worker();
+        Student student = new Student();
+        weather.registerObserver(worker);
+        weather.registerObserver(student);
+        weather.setMessage("rain message");
+        weather.removeObserver(worker);
+        weather.setMessage("snow message");
     }
 }
