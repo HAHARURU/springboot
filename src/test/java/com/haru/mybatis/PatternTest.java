@@ -20,6 +20,8 @@ import com.haru.mybatis.pattern.facade.Facade;
 import com.haru.mybatis.pattern.factory.CircleFactory;
 import com.haru.mybatis.pattern.factory.TriangleFactory;
 import com.haru.mybatis.pattern.flyweight.ShapeFlyweightFactory;
+import com.haru.mybatis.pattern.iterator.white.FruitAggregate;
+import com.haru.mybatis.pattern.iterator.white.Iterator;
 import com.haru.mybatis.pattern.observer.Student;
 import com.haru.mybatis.pattern.observer.Weather;
 import com.haru.mybatis.pattern.observer.Worker;
@@ -39,6 +41,9 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.lang.reflect.Proxy;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author HARU
@@ -211,5 +216,28 @@ public class PatternTest {
         weather.setMessage("rain message");
         weather.removeObserver(worker);
         weather.setMessage("snow message");
+    }
+
+    @Test
+    public void WhiteIteratorTest() {
+        String[] fruitArray = {"apple", "banana", "strawberry"};
+        List<String> fruits = new ArrayList<String>(Arrays.asList(fruitArray));
+        FruitAggregate fruitAggregate = new FruitAggregate(fruits);
+        Iterator iterator = fruitAggregate.getIterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+
+    @Test
+    public void BlackIteratorTest() {
+        String[] fruitArray = {"apple", "banana", "strawberry"};
+        List<String> fruits = new ArrayList<String>(Arrays.asList(fruitArray));
+        com.haru.mybatis.pattern.iterator.black.FruitAggregate fruitAggregate = new com.haru.mybatis.pattern.iterator
+                .black.FruitAggregate(fruits);
+        Iterator iterator = fruitAggregate.getIterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 }
