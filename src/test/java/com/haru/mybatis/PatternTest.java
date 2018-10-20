@@ -11,6 +11,10 @@ import com.haru.mybatis.pattern.builder.Actor;
 import com.haru.mybatis.pattern.builder.ActorBuilder;
 import com.haru.mybatis.pattern.builder.ActorDirector;
 import com.haru.mybatis.pattern.builder.SaberBuilder;
+import com.haru.mybatis.pattern.chain.LetterHandler;
+import com.haru.mybatis.pattern.chain.NumberHandler;
+import com.haru.mybatis.pattern.chain.SpecialCharacterHandler;
+import com.haru.mybatis.pattern.chain.StringHandler;
 import com.haru.mybatis.pattern.composite.Folder;
 import com.haru.mybatis.pattern.composite.ImageFile;
 import com.haru.mybatis.pattern.composite.VideoFile;
@@ -239,5 +243,14 @@ public class PatternTest {
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
+    }
+
+    @Test
+    public void ChainTest() {
+        StringHandler numberHandler = new NumberHandler();
+        StringHandler letterHandler = new LetterHandler();
+        StringHandler specialCharacterHandler = new SpecialCharacterHandler();
+        numberHandler.setNextHandler(letterHandler).setNextHandler(specialCharacterHandler);
+        numberHandler.handleString("a1sA@2d3$cA");
     }
 }
