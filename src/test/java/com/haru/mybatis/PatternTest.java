@@ -15,6 +15,7 @@ import com.haru.mybatis.pattern.chain.LetterHandler;
 import com.haru.mybatis.pattern.chain.NumberHandler;
 import com.haru.mybatis.pattern.chain.SpecialCharacterHandler;
 import com.haru.mybatis.pattern.chain.StringHandler;
+import com.haru.mybatis.pattern.command.*;
 import com.haru.mybatis.pattern.composite.Folder;
 import com.haru.mybatis.pattern.composite.ImageFile;
 import com.haru.mybatis.pattern.composite.VideoFile;
@@ -252,5 +253,17 @@ public class PatternTest {
         StringHandler specialCharacterHandler = new SpecialCharacterHandler();
         numberHandler.setNextHandler(letterHandler).setNextHandler(specialCharacterHandler);
         numberHandler.handleString("a1sA@2d3$cA");
+    }
+
+    @Test
+    public void commandTest() {
+        ToyCar toyCar = new ToyCar();
+        Command forwardCommand = new ForwardCommand(toyCar);
+        Command backCommand = new BackCommand(toyCar);
+        Controller controller = new Controller();
+        controller.setForwardCommand(forwardCommand);
+        controller.setBackCommand(backCommand);
+        controller.forward();
+        controller.back();
     }
 }
