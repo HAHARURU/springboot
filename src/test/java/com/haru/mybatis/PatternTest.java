@@ -1,5 +1,8 @@
 package com.haru.mybatis;
 
+import com.haru.mybatis.pattern.Memento.Memento;
+import com.haru.mybatis.pattern.Memento.MementoManagement;
+import com.haru.mybatis.pattern.Memento.Origin;
 import com.haru.mybatis.pattern.Shape;
 import com.haru.mybatis.pattern.abstarcted.Color;
 import com.haru.mybatis.pattern.abstarcted.RedCircleFactory;
@@ -265,5 +268,19 @@ public class PatternTest {
         controller.setBackCommand(backCommand);
         controller.forward();
         controller.back();
+    }
+
+    @Test
+    public void MementoTest() {
+        Origin origin = new Origin();
+        origin.setValue("saveData1");
+        Memento memento = origin.createMemento();
+        MementoManagement mementoManagement = new MementoManagement();
+        mementoManagement.setMemento(memento);
+        System.out.println(origin.getValue());
+        origin.setValue("saveData2");
+        System.out.println(origin.getValue());
+        origin.getMementoState(mementoManagement.getMemento());
+        System.out.println(origin.getValue());
     }
 }
