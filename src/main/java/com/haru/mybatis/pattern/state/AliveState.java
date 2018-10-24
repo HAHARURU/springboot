@@ -6,11 +6,6 @@ package com.haru.mybatis.pattern.state;
  */
 public class AliveState implements State {
     @Override
-    public void changeState(Context context) {
-        context.setState(this);
-    }
-
-    @Override
     public void action() {
         System.out.println("alive action");
     }

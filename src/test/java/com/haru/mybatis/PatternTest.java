@@ -291,11 +291,9 @@ public class PatternTest {
     @Test
     public void StateTest() {
         Context context = new Context();
-        State aliveState = new AliveState();
-        aliveState.changeState(context);
-        context.getState().action();
-        State deathState = new DeathState();
-        deathState.changeState(context);
-        context.getState().action();
+        context.setValue("alive");
+        context.run();
+        context.setValue("death");
+        context.run();
     }
 }

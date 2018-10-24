@@ -7,11 +7,27 @@ package com.haru.mybatis.pattern.state;
 public class Context {
     private State state;
 
-    public State getState() {
-        return state;
+    private String value;
+
+    public void run() {
+        changeState();
+        this.state.action();
     }
 
-    public void setState(State state) {
-        this.state = state;
+    private void changeState() {
+        if ("alive".equals(value)) {
+            this.state = new AliveState();
+        }
+        if ("death".equals(value)) {
+            this.state = new DeathState();
+        }
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }
