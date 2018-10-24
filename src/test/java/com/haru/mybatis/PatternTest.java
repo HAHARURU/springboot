@@ -39,6 +39,10 @@ import com.haru.mybatis.pattern.prototype.Driver;
 import com.haru.mybatis.pattern.prototype.Order;
 import com.haru.mybatis.pattern.proxy.*;
 import com.haru.mybatis.pattern.simple.ShapeFactory;
+import com.haru.mybatis.pattern.state.AliveState;
+import com.haru.mybatis.pattern.state.Context;
+import com.haru.mybatis.pattern.state.DeathState;
+import com.haru.mybatis.pattern.state.State;
 import com.haru.mybatis.pattern.strategy.AddMethod;
 import com.haru.mybatis.pattern.strategy.MathContext;
 import com.haru.mybatis.pattern.strategy.SubtractMethod;
@@ -282,5 +286,16 @@ public class PatternTest {
         System.out.println(origin.getValue());
         origin.getMementoState(mementoManagement.getMemento());
         System.out.println(origin.getValue());
+    }
+
+    @Test
+    public void StateTest() {
+        Context context = new Context();
+        State aliveState = new AliveState();
+        aliveState.changeState(context);
+        context.getState().action();
+        State deathState = new DeathState();
+        deathState.changeState(context);
+        context.getState().action();
     }
 }
