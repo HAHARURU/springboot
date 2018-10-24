@@ -49,6 +49,7 @@ import com.haru.mybatis.pattern.strategy.SubtractMethod;
 import com.haru.mybatis.pattern.template.Dinner;
 import com.haru.mybatis.pattern.template.Kelp;
 import com.haru.mybatis.pattern.template.Potato;
+import com.haru.mybatis.pattern.visitor.*;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -295,5 +296,13 @@ public class PatternTest {
         context.run();
         context.setValue("death");
         context.run();
+    }
+
+    @Test
+    public void VisitorTest() {
+        ObjectStructure objectStructure = new ObjectStructure();
+        objectStructure.addElement(new ElementA());
+        objectStructure.addElement(new ElementB());
+        objectStructure.accept(new VisitorA());
     }
 }
