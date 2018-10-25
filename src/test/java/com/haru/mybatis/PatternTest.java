@@ -30,6 +30,10 @@ import com.haru.mybatis.pattern.factory.TriangleFactory;
 import com.haru.mybatis.pattern.flyweight.ShapeFlyweightFactory;
 import com.haru.mybatis.pattern.iterator.white.FruitAggregate;
 import com.haru.mybatis.pattern.iterator.white.Iterator;
+import com.haru.mybatis.pattern.mediator.ChatMediator;
+import com.haru.mybatis.pattern.mediator.ChatUser;
+import com.haru.mybatis.pattern.mediator.ChatUserA;
+import com.haru.mybatis.pattern.mediator.ChatUserB;
 import com.haru.mybatis.pattern.observer.Student;
 import com.haru.mybatis.pattern.observer.Weather;
 import com.haru.mybatis.pattern.observer.Worker;
@@ -304,5 +308,16 @@ public class PatternTest {
         objectStructure.addElement(new ElementA());
         objectStructure.addElement(new ElementB());
         objectStructure.accept(new VisitorA());
+    }
+
+    @Test
+    public void MediatorTest() {
+        ChatMediator chatMediator = new ChatMediator();
+        ChatUserA chatUserA = new ChatUserA("熊猫人", chatMediator);
+        ChatUserB chatUserB = new ChatUserB("蘑菇头", chatMediator);
+        chatMediator.setChatUserA(chatUserA);
+        chatMediator.setChatUserB(chatUserB);
+        chatUserA.sendMessage("星期天上班");
+        chatUserB.sendMessage("请假");
     }
 }
