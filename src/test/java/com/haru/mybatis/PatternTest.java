@@ -320,4 +320,10 @@ public class PatternTest {
         chatUserA.sendMessage("星期天上班");
         chatUserB.sendMessage("请假");
     }
+
+    @Test
+    public void interpreterTest() {
+        com.haru.mybatis.pattern.interpreter.Context context = new com.haru.mybatis.pattern.interpreter.Context("number1 * number2 / number3 + number4 - number5");
+        context.interpret();
+    }
 }
