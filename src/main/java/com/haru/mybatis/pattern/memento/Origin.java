@@ -1,4 +1,4 @@
-package com.haru.mybatis.pattern.Memento;
+package com.haru.mybatis.pattern.memento;
 
 /**
  * @author HARU
