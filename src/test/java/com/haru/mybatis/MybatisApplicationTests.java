@@ -224,4 +224,62 @@ public class MybatisApplicationTests {
 //        System.out.println(post);
 
     }
+
+    @Test
+    public void stringFormat() {
+        String s = "{\"sId\":\"681b3a87-62a7-43f3-99aa-c65740ce982b\",\"sType\":1}," +
+                "{\"sId\":\"38203c38-5784-4e8e-b464-73e4144c55f5\",\"sType\":1}," +
+                "{\"sId\":\"b31bda05-7fa6-41cd-b76e-c791ecbf1800\",\"sType\":1}," +
+                "{\"sId\":\"4f17a4b4-8602-49cc-9d45-8e9c84b17462\",\"sType\":1}," +
+                "{\"sId\":\"1735388d-24c2-45c9-9755-5af475c3834a\",\"sType\":1}," +
+                "{\"sId\":\"e7ff0ac6-9f52-404b-a535-e5ef987b7c0a\",\"sType\":1}," +
+                "{\"sId\":\"dbc6e5e9-b8c5-49fa-8621-887965b44dc3\",\"sType\":1}," +
+                "{\"sId\":\"26ca274d-9ae3-40eb-9894-09adc0dbe267\",\"sType\":1}," +
+                "{\"sId\":\"6b503284-4362-4db4-bb35-03e5858ebce1\",\"sType\":1}," +
+                "{\"sId\":\"7ea8539e-525b-476c-b1d2-9712c900e563\",\"sType\":1}," +
+                "{\"sId\":\"2c4e8c3a-1ccb-4b1a-8dc5-fce277de39db\",\"sType\":1}," +
+                "{\"sId\":\"da9efcd2-88ff-4205-81fc-6053c5f98ffc\",\"sType\":1}," +
+                "{\"sId\":\"209307f1-1a2e-4423-96b0-c95360ca205c\",\"sType\":1}," +
+                "{\"sId\":\"10ad8868-3327-4113-9b1c-150eb297f518\",\"sType\":1}," +
+                "{\"sId\":\"ce179b07-d248-48f4-9030-d09bfee2e2b7\",\"sType\":1}," +
+                "{\"sId\":\"6ada3ec8-f33d-4f53-be0e-6c6966bca93f\",\"sType\":1}," +
+                "{\"sId\":\"105d531f-66a3-4922-b822-a1bba0c547eb\",\"sType\":1}," +
+                "{\"sId\":\"ca0e2605-99ad-4311-816c-175186e8e884\",\"sType\":1}," +
+                "{\"sId\":\"684dcd6b-a56a-41e1-899e-3e18882e6f8f\",\"sType\":1}," +
+                "{\"sId\":\"bc3bc79d-9719-4f9a-956b-f29d768f671f\",\"sType\":1}," +
+                "{\"sId\":\"80069fa5-51f8-42d9-b9b4-7fe1ba191b83\",\"sType\":1}," +
+                "{\"sId\":\"90bb3f87-0ee3-4cbc-9d00-836bf7e07ed9\",\"sType\":1}," +
+                "{\"sId\":\"0298c23e-215f-46f8-93fd-a48a769925d0\",\"sType\":1}," +
+                "{\"sId\":\"14da0bce-aa2e-4904-963a-567c8fab636c\",\"sType\":1}," +
+                "{\"sId\":\"e286b5da-5fa0-4089-ab20-20d999e5bff6\",\"sType\":1}," +
+                "{\"sId\":\"a04c2b8e-bb94-49cc-b38e-49d2c15bc445\",\"sType\":1}," +
+                "{\"sId\":\"848d94e8-3525-43ca-8f33-d2cb34be2108\",\"sType\":1}," +
+                "{\"sId\":\"416addc5-4c8c-410c-b0d9-6246a36f29aa\",\"sType\":1}," +
+                "{\"sId\":\"07b2d540-7025-4b86-ba0d-cf28aa976ced\",\"sType\":1}," +
+                "{\"sId\":\"17a96a5a-793c-4182-b01e-c765c899979b\",\"sType\":1}," +
+                "{\"sId\":\"cf8a0e86-d000-418a-add6-7e6811fc4192\",\"sType\":1}," +
+                "{\"sId\":\"5a2dedd4-c9bc-4db2-938c-de6ec6a5adf4\",\"sType\":1}," +
+                "{\"sId\":\"43a901a5-9779-4e7b-8397-d8dabb1d866b\",\"sType\":1}," +
+                "{\"sId\":\"2b1f1fb8-a618-4094-b9de-01863b1c8796\",\"sType\":1}," +
+                "{\"sId\":\"257fe863-c03a-4f42-b80f-8de2108763f5\",\"sType\":1}," +
+                "{\"sId\":\"177b3324-a661-4158-8c9f-b8db06c97a13\",\"sType\":1}," +
+                "{\"sId\":\"af462dfb-e796-4dcb-9e50-04c7204c9b57\",\"sType\":1}," +
+                "{\"sId\":\"8b688fe4-83f1-4459-9552-77c32303a898\",\"sType\":1}," +
+                "{\"sId\":\"6ae60b48-f632-49cd-9ead-71c3b53e8331\",\"sType\":1}," +
+                "{\"sId\":\"2aa7e661-974e-478e-a0b5-da48c26b3aae\",\"sType\":1}," +
+                "{\"sId\":\"1f2c3776-ac46-431b-8740-da2df4ce2df9\",\"sType\":1}," +
+                "{\"sId\":\"ce563e2a-b651-4848-a5f8-d3e4eb3bf8d3\",\"sType\":1}," +
+                "{\"sId\":\"c7cef101-b493-4bfa-bc07-e920570c0f3e\",\"sType\":1}," +
+                "{\"sId\":\"da5f2778-8251-47c6-85af-298502e65b35\",\"sType\":1}," +
+                "{\"sId\":\"9ccfd71c-4c2f-4766-ba66-b67291d00f67\",\"sType\":1}," +
+                "{\"sId\":\"4df08883-d98a-433a-8eb0-ba07fa7135a6\",\"sType\":1}," +
+                "{\"sId\":\"30cc9db5-fb86-4400-b4a8-f2ec97bbed87\",\"sType\":1}," +
+                "{\"sId\":\"aaf9be27-5031-41fe-9079-b19387502eb6\",\"sType\":1}," +
+                "{\"sId\":\"43ff94b5-415a-4d64-a0ee-3083cca3af2b\",\"sType\":1}," +
+                "{\"sId\":\"3a53b952-4137-42d7-87b1-4dc28698b2d0\",\"sType\":1}," +
+                "{\"sId\":\"3a35db70-214d-4a7c-8595-5db619b37295\",\"sType\":1},";
+        String replace = s.replace("{\"sId\":\"", "'");
+        String replace1 = replace.replace("\",\"sType\":1},", "',");
+        System.out.println("replace1::::" +  replace1);
+    }
 }

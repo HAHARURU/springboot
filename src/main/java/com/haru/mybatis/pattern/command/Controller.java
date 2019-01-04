@@ -5,22 +5,13 @@ package com.haru.mybatis.pattern.command;
  * @since 2018/10/21
  */
 public class Controller {
-    private Command forwardCommand;
-    private Command backCommand;
+    private Command command;
 
-    public void setForwardCommand(Command forwardCommand) {
-        this.forwardCommand = forwardCommand;
+    public void setCommand(Command command) {
+        this.command = command;
     }
 
-    public void setBackCommand(Command backCommand) {
-        this.backCommand = backCommand;
-    }
-
-    public void forward() {
-        forwardCommand.execute();
-    }
-
-    public void back() {
-        backCommand.execute();
+    public void executeCommand() {
+        command.execute();
     }
 }

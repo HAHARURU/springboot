@@ -7,17 +7,19 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
+ * 过滤器
+ *
  * @author HARU
  * @since 2018/8/22
  */
 @Configuration
-public class CorsConfig {
+public class CORSConfig {
     private CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*"); // 1允许任何域名使用
         corsConfiguration.addAllowedHeader("*"); // 2允许任何头
         corsConfiguration.addAllowedMethod("*"); // 3允许任何方法（post、get等）
-        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setAllowCredentials(true);    // 保持cookie
         return corsConfiguration;
     }
 

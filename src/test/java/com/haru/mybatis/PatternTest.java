@@ -269,10 +269,10 @@ public class PatternTest {
         Command forwardCommand = new ForwardCommand(toyCar);
         Command backCommand = new BackCommand(toyCar);
         Controller controller = new Controller();
-        controller.setForwardCommand(forwardCommand);
-        controller.setBackCommand(backCommand);
-        controller.forward();
-        controller.back();
+        controller.setCommand(forwardCommand);
+        controller.executeCommand();
+        controller.setCommand(backCommand);
+        controller.executeCommand();
     }
 
     @Test
