@@ -1,5 +1,6 @@
 package com.haru.mybatis;
 
+import com.haru.mybatis.listener.InitService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @MapperScan(basePackages = {"com.haru.mybatis.mapper", "com.haru.mybatis.advice"}) //扫描统一异常包
 public class MybatisApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MybatisApplication.class, args);
+        SpringApplication springApplication = new SpringApplication(MybatisApplication.class);
+        springApplication.addListeners(new InitService());
+        springApplication.run(args);
     }
 }

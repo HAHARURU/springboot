@@ -3,11 +3,19 @@ package com.haru.mybatis;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.haru.mybatis.generation.component.GenerateBeanComponent;
+import com.haru.mybatis.generation.pojo.Field;
+import com.haru.mybatis.generation.pojo.OriginData;
+import com.haru.mybatis.model.Address;
 import com.haru.mybatis.model.Country;
+import com.haru.mybatis.model.Item;
+import com.haru.mybatis.model.Order;
 import com.haru.mybatis.mongoRepository.CountryMongoRepository;
 import com.haru.mybatis.repository.CountryRepository;
 import com.haru.mybatis.schedule.AsyncTask;
 import com.haru.mybatis.service.CountryService;
+import com.haru.mybatis.util.BeanUtils;
+import com.haru.mybatis.util.CollectionUtils;
 import com.haru.mybatis.util.GsonView;
 import com.haru.mybatis.util.encryption.MD5;
 import com.haru.mybatis.util.encryption.SortCollection;
@@ -24,12 +32,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.concurrent.ExecutionException;
@@ -44,6 +50,9 @@ public class MybatisApplicationTests {
 
     @Autowired
     private CountryMongoRepository countryMongoRepository;
+
+    @Resource
+    private GenerateBeanComponent generateBeanComponent;
 
     @Autowired
     private AsyncTask asyncTask;
@@ -281,5 +290,58 @@ public class MybatisApplicationTests {
         String replace = s.replace("{\"sId\":\"", "'");
         String replace1 = replace.replace("\",\"sType\":1},", "',");
         System.out.println("replace1::::" +  replace1);
+    }
+
+    @Test
+    public void deepCopyTest() {
+        // 创建地址对象
+        Address address = new Address();
+        address.setCity("上海");
+        address.setId(1);
+
+        // 创建商品集合
+        Item fruits = new Item();
+        fruits.setId(1);
+        fruits.setName("水果");
+        Item meat = new Item();
+        meat.setId(2);
+        meat.setName("肉");
+        List<Item> items = CollectionUtils.createList(ArrayList.class, fruits, meat);
+
+        // 创建订单对象
+        Order order = new Order();
+        order.setAddress(address);
+        order.setId(1);
+        order.setOrderCode("01");
+        order.setItems(items);
+
+        // 获取类的字段名集合
+        List<String> classFieldNames = BeanUtils.classFieldNames(Order.class);
+
+        // 深拷贝
+        Order deepCopyOrder = new Order();
+        BeanUtils.deepCopy(order, deepCopyOrder,  CollectionUtils.getListByIndex(classFieldNames, 0, 2));
+
+        System.out.println("over");
+
+    }
+
+    @Test
+    public void testPath() {
+        OriginData originData = new OriginData();
+        originData.setAuthor("haru");
+        originData.setPackageName("com.mybatis.model");
+        originData.setDescription("用户");
+        originData.setClassName("User");
+        Field fieldId = new Field();
+        fieldId.setName("id");
+        fieldId.setType("Integer");
+        fieldId.setComments("用户id");
+        Field fieldDate = new Field();
+        fieldDate.setName("createDate");
+        fieldDate.setType("Date");
+        fieldDate.setComments("创建时间");
+        originData.setFields(CollectionUtils.createList(ArrayList.class, fieldId, fieldDate));
+        generateBeanComponent.generateBean(originData);
     }
 }
