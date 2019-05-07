@@ -1,6 +1,7 @@
 package ${packageName};
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 <#if importPackages?exists && (importPackages?size > 0)>
@@ -18,6 +19,7 @@ import java.io.Serializable;
  * @date <#if creatDate?exists>${creatDate}</#if>
  **/
 @Data
+@ToString
 <#if className?exists>public class ${className} </#if><#if extendsName?exists> extends ${extendsName}</#if><#if implementsList?exists && (implementsList?size > 0)>implements<#list implementsList as implementsItem> ${implementsItem}<#if implementsItem_has_next>,</#if></#list></#if> {
 <#-- 生成属性 -->
 
