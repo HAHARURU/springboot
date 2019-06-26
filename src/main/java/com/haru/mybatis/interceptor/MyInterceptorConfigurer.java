@@ -10,9 +10,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 public class MyInterceptorConfigurer extends WebMvcConfigurerAdapter {
+   
+    @Bean
+    public MyInterceptor  getMyInterceptor (){
+        return new MyInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**").excludePathPatterns("/country/**");
+        registry.addInterceptor(new getMyInterceptor()).addPathPatterns("/**").excludePathPatterns("/country/**");
         super.addInterceptors(registry);
     }
 }
